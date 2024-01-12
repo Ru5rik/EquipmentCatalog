@@ -68,13 +68,13 @@ namespace EquipmentCatalog.Pages
 
 		private void AddClick(object sender, RoutedEventArgs e)
 		{
-			PageUtils.MainFrame.Navigate(new EditorPage(null));
+			PageUtils.MainFrame.Navigate(new EditorPage(null, LoadEquipment));
 		}
 		
 		public async void LoadEquipment()
 		{
 			_equipments = await APIService.GetEquipmentAsync();
-
+			Equipments.Clear();
 			foreach (var item in _equipments)
 			{
 				Equipments.Add(item);
@@ -85,7 +85,7 @@ namespace EquipmentCatalog.Pages
 		{
 			var data = ((Button)sender).DataContext as Equipment;
 
-			PageUtils.MainFrame.Navigate(new EditorPage(data));
+			PageUtils.MainFrame.Navigate(new EditorPage(data, LoadEquipment));
 		}
 
 		// search

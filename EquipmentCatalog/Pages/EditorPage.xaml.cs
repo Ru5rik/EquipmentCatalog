@@ -27,13 +27,15 @@ namespace EquipmentCatalog.Pages
 		//public Equipment Equipment { get; set; }
 		private bool _isNew;
 		private IEnumerable<Department> _departments;
+		private Action _operationAction;
 
-		public EditorPage(Equipment equipment)
+		public EditorPage(Equipment equipment, Action action)
 		{
 			InitializeComponent();
 			DataContext = this;
 
 			GetData(equipment);
+			_operationAction = action;
 		}
 
 		private async Task LoadTypes()
@@ -105,6 +107,8 @@ namespace EquipmentCatalog.Pages
 			if (StatusBox.SelectedItem == null || TypeBox.SelectedItem == null || PlaceBox.SelectedItem == null || string.IsNullOrEmpty(Equipment.Name))
 			{
 				MessageBox.Show("Необходимо заполнить все обязательные поля!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+				LoadingBar.Visibility = Visibility.Collapsed;
+				Body.IsEnabled = true;
 				return;
 			}
 			Equipment.StatusId = StatusBox.SelectedIndex + 1;
@@ -123,7 +127,6 @@ namespace EquipmentCatalog.Pages
 				result = await APIService.UpdateEquipmentAsync(Equipment);
 			}
 			// load files to server
-
 			if (!result)
 			{
 				MessageBox.Show("Не удалось добавить оборудование!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -131,7 +134,7 @@ namespace EquipmentCatalog.Pages
 			else
 			{
 				PageUtils.MainFrame.GoBack();
-				//((MainPage)PageUtils.MainFrame.DataContext).LoadEquipment();
+				_operationAction?.Invoke();
 			}
 
 			LoadingBar.Visibility = Visibility.Collapsed;

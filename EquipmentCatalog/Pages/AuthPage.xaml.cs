@@ -11,12 +11,11 @@ namespace EquipmentCatalog.Pages
 	public partial class AuthPage : Page
 	{
 		public string Login { get; set; }
-		public string Password { get; set; }
 		public AuthPage()
 		{
 			InitializeComponent();
 
-			DataContext = this;
+			DataContext = this; 
 		}
 
 		private async void ButtonClick(object sender, RoutedEventArgs e)
@@ -24,9 +23,9 @@ namespace EquipmentCatalog.Pages
 			SubmitButton.IsEnabled = false;
 			LoadingBar.Visibility = Visibility.Visible;
 
-			if (!string.IsNullOrEmpty(Login) || !string.IsNullOrEmpty(Password))
+			if (!string.IsNullOrEmpty(Login) || !string.IsNullOrEmpty(PasswordBox.Password))
 			{
-				string result = await APIService.AuthorizationAsync(Login, Password);
+				string result = await APIService.AuthorizationAsync(Login, PasswordBox.Password);
 
 				if (!string.IsNullOrEmpty(result))
 				{

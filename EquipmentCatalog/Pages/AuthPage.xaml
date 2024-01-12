@@ -30,8 +30,8 @@
             <TextBox  Template="{DynamicResource InputTemplate}" Grid.Column="1" 
                       Style="{DynamicResource Input}" Text="{Binding Login}"/>
             <TextBlock Text="Пароль" Grid.Row="1" Style="{DynamicResource TextL2}"/>
-            <TextBox Template="{DynamicResource InputTemplate}" Grid.Column="1"
-                     Grid.Row="1" Style="{DynamicResource Input}" Text="{Binding Password}"/>
+            <PasswordBox Template="{DynamicResource InputPasswordTemplate}" Grid.Column="1"
+                     Grid.Row="1" Style="{DynamicResource InputPassword}" x:Name="PasswordBox"/>
             <Button Style="{DynamicResource ButtonStyle}" Grid.Row="2" Grid.ColumnSpan="2" 
                     Content="Войти" Width="100" Margin="0 15" x:Name="SubmitButton"
                     Click="ButtonClick" IsEnabled="{Binding IsAvaliable}" Height="40"/>
