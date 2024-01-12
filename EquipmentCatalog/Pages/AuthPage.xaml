@@ -1,0 +1,42 @@
+﻿<Page x:Class="EquipmentCatalog.Pages.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EquipmentCatalog.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AuthPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="100" MinHeight="100"/>
+            <RowDefinition Height="2*" MinHeight="190"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Авторизация" Style="{DynamicResource TextTitle}" HorizontalAlignment="Center" Grid.Row="1"/>
+        <Grid Grid.Row="2" Width="300">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Логин" Style="{DynamicResource TextL2}"/>
+            <TextBox  Template="{DynamicResource InputTemplate}" Grid.Column="1" 
+                      Style="{DynamicResource Input}" Text="{Binding Login}"/>
+            <TextBlock Text="Пароль" Grid.Row="1" Style="{DynamicResource TextL2}"/>
+            <TextBox Template="{DynamicResource InputTemplate}" Grid.Column="1"
+                     Grid.Row="1" Style="{DynamicResource Input}" Text="{Binding Password}"/>
+            <Button Style="{DynamicResource ButtonStyle}" Grid.Row="2" Grid.ColumnSpan="2" 
+                    Content="Войти" Width="100" Margin="0 15" x:Name="SubmitButton"
+                    Click="ButtonClick" IsEnabled="{Binding IsAvaliable}" Height="40"/>
+        </Grid>
+        <ProgressBar x:Name="LoadingBar" IsIndeterminate="True" Padding="5" 
+                     Grid.Row="3" Width="100" Height="5" Visibility="Collapsed"/>
+    </Grid>
+</Page>
